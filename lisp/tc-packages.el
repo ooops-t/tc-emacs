@@ -9,7 +9,10 @@
 (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
 			 ("nongnu" . "http://mirrors.ustc.edu.cn/elpa/nongnu/")))
-(package-refresh-contents)
+;;; Install use-package packages manager
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 (provide 'tc-packages)
 ;;; end of tc-packages.el
