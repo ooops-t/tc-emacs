@@ -19,3 +19,5 @@
 (require 'tc-faces)
 
 (require 'tc-edits)
+
+(require 'tc-programs)

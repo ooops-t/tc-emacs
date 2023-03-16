@@ -20,6 +20,12 @@
 (if (fboundp 'scroll-bar-mode)
     (set-scroll-bar-mode nil))
 
+;;; Show emacs init time
+;;; Reference: <https://emacs.stackexchange.com/questions/432/how-to-change-default-minibuffer-message>
+(defun display-startup-echo-area-message ()
+  (message (concat "Let's emacs hacking!!! Init time: "
+		    (emacs-init-time))))
+
 ;;; Font
 (defconst default-font-pt 10)
 (defvar font-size 11)
