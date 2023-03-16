@@ -7,6 +7,11 @@
 ;;; Load configs path
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
+;;; Save custom cariables to other file
+(setq custom-file
+      (concat user-emacs-directory "custom.el"))
+(load custom-file 'noerror)
+
 (require 'tc-packages)
 
 (require 'tc-faces)
