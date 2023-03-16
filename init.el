@@ -14,6 +14,8 @@
 
 (require 'tc-packages)
 
+(require 'tc-tools)
+
 (require 'tc-faces)
 
 (require 'tc-edits)
