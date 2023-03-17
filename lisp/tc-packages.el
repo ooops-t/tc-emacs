@@ -1,7 +1,9 @@
 (require 'package)
 
 ;;; Reference: <https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure>
-(setq package-check-signature nil)
+;;; When the emacs version is 27 or later, can't set
+(unless (> emacs-major-version 25)
+  (setq package-check-signature nil))
 
 ;;; "nongnu" . "http://mirrors.ustc.edu.cn/elpa/nongnu/"
 ;;; "gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/"
