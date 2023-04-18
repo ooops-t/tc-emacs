@@ -28,10 +28,10 @@
 
 ;;; Font
 (defconst default-font-pt 10)
-(defvar font-size 11)
+(defvar font-size 12)
 (set-face-attribute 'default nil
 		    :family "Monospace"
-		    :font "Ubuntu Mono"
+		    :font "CodeNewRoman NF"
 		    :height (* default-font-pt
 			       font-size) ;;; 1/10 pt
 		    :weight 'light
