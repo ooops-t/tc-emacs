@@ -27,21 +27,36 @@
 		    (emacs-init-time))))
 
 ;;; Font
-(defconst default-font-pt 10)
-(defvar font-size 12)
-(set-face-attribute 'default nil
-		    :family "Monospace"
-		    :font "CodeNewRoman NF"
-		    :height (* default-font-pt
-			       font-size) ;;; 1/10 pt
-		    :weight 'light
-		    :underline nil)
-
+;;; (defconst default-font-pt 10)
+;;; (defvar font-size 12)
+;;; (set-face-attribute 'default nil
+;;;		    :family "Monospace"
+;;;		    :font "CodeNewRoman NF"
+;;;		    :height (* default-font-pt
+;;;			       font-size) ;;; 1/10 pt
+;;;		    :weight 'light
+;;;		    :underline nil)
+;;;
 ;;; Theme
-(use-package github-modern-theme
-  :ensure t
-  :config
-  (load-theme 'github-modern t))
+;;; (use-package github-modern-theme
+;;;   :ensure t
+;;;   :config
+;;;   (load-theme 'github-modern t))
+;;;
+
+(defun get-total-lines ()
+    (count-lines (point-min)
+		 (point-max)))
+(defun lines-width (lines)
+  (number-to-string (string-bytes
+		     (number-to-string lines))))
+
+(setq linum-format
+      (concat (concat "% "
+		      (lines-width (get-total-lines)))
+      "d "))
+
+(global-linum-mode)
 
 (provide 'tc-faces)
 ;;; end of tc-faces.el
