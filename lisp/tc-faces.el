@@ -24,7 +24,7 @@
 ;;; Reference: <https://emacs.stackexchange.com/questions/432/how-to-change-default-minibuffer-message>
 (defun display-startup-echo-area-message ()
   (message (concat "Let's emacs hacking!!! Init time: "
-		    (emacs-init-time))))
+		   (emacs-init-time))))
 
 ;;; Font
 ;;; (defconst default-font-pt 10)
@@ -44,19 +44,26 @@
 ;;;   (load-theme 'github-modern t))
 ;;;
 
+;;; Show line number
 (defun get-total-lines ()
-    (count-lines (point-min)
-		 (point-max)))
+  (count-lines (point-min)
+	       (point-max)))
 (defun lines-width (lines)
   (number-to-string (string-bytes
 		     (number-to-string lines))))
-
 (setq linum-format
       (concat (concat "% "
 		      (lines-width (get-total-lines)))
-      "d "))
+	      "d "))
 
 (global-linum-mode)
+
+;;; Show the column indicator
+(setq-default display-fill-column-indicator-column 80)
+(setq-default display-fill-column-indicator-character 9474) ;;; '|'
+(global-display-fill-column-indicator-mode t)
+;;; Show column number
+(column-number-mode nil)
 
 (provide 'tc-faces)
 ;;; end of tc-faces.el
