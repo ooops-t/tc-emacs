@@ -26,23 +26,26 @@
   (message (concat "Let's emacs hacking!!! Init time: "
 		   (emacs-init-time))))
 
+(if (display-graphic-p)
+    (progn
 ;;; Font
-;;; (defconst default-font-pt 10)
-;;; (defvar font-size 12)
-;;; (set-face-attribute 'default nil
-;;;		    :family "Monospace"
-;;;		    :font "CodeNewRoman NF"
-;;;		    :height (* default-font-pt
-;;;			       font-size) ;;; 1/10 pt
-;;;		    :weight 'light
-;;;		    :underline nil)
-;;;
+      (defconst default-font-pt 10)
+      (defvar font-size 12)
+      (set-face-attribute 'default nil
+			  :family "Monospace"
+			  :font "CodeNewRoman NF"
+			  :height (* default-font-pt
+				     font-size) ;;; 1/10 pt
+			  :weight 'light
+			  :underline nil)
+
 ;;; Theme
-;;; (use-package github-modern-theme
-;;;   :ensure t
-;;;   :config
-;;;   (load-theme 'github-modern t))
-;;;
+      (use-package github-modern-theme
+	:ensure t
+	:config
+	(load-theme 'github-modern t)))
+;;; Terminal
+  (load-theme 'manoj-dark t))
 
 ;;; Show line number
 (defun get-total-lines ()
