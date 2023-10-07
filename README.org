@@ -1,0 +1,55 @@
+#+title: My personal emacs configuration
+#+author: chn.taocheng
+
+* emacs gc config
+#+begin_src emacs-lisp :tangle "early-init.el"
+  ;;; <2023-10-07 Sat>
+  (setq gc-cons-threshold 800000)
+  (setq gc-cons-percentage 0.5)
+#+end_src
+
+* custom variables
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; <2023-10-07 Sat>
+  (setq custom-file
+	(concat user-emacs-directory "custom.el"))
+  (load custom-file 'noerror)
+#+end_src
+
+* font
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; <2023-10-07 Sat>
+  (set-face-attribute 'default nil
+		      :family "Monospace"
+		      :font "Intel One Mono"
+		      :foundry "outline"
+		      :weight 'regular
+		      :height 110)
+#+end_src
+
+* views
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; <2023-10-07 Sat>
+  ;;; tool bar
+  (if (fboundp 'tool-bar-mode)
+      (tool-bar-mode -1))
+  ;;; scroll bar
+  (if (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode nil))
+  ;;; menu bar
+  (if (fboundp 'menu-bar-mode)
+      (menu-bar-mode -1))
+  ;;; startup screen
+  (setq inhibit-startup-screen t)
+  ;;; line number
+  (global-linum-mode)
+  ;;; highlight current line
+  (global-hl-line-mode)
+#+end_src
+
+* editor
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; <2023-10-07 Sat>
+  ;;; backup files
+  (setq make-backup-files nil)
+#+end_src
