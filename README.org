@@ -16,6 +16,23 @@
   (load custom-file 'noerror)
 #+end_src
 
+* init packages manager
+#+begin_src emacs-lisp :tangle "early-init.el"
+  ;;; <2023-10-08 Sun>
+  (setq package-enable-at-startup nil)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; <2023-10-08 Sun>
+  (package-initialize)
+  (setq package-archives
+	'(("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
+  ;;; install use-package
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+#+end_src
+
 * font
 #+begin_src emacs-lisp :tangle "init.el"
   ;;; <2023-10-07 Sat>
@@ -54,4 +71,11 @@
   ;;; <2023-10-07 Sat>
   ;;; backup files
   (setq make-backup-files nil)
+#+end_src
+
+* themes
+#+begin_src emacs-lisp :tangle "init.el"
+  (use-package solarized-theme
+    :ensure t)
+  (load-theme 'solarized-gruvbox-light t)
 #+end_src
