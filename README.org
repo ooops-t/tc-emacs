@@ -35,14 +35,16 @@
       (tool-bar-mode -1))
   ;;; scroll bar
   (if (fboundp 'scroll-bar-mode)
-      (scroll-bar-mode nil))
+      (set-scroll-bar-mode nil))
   ;;; menu bar
   (if (fboundp 'menu-bar-mode)
       (menu-bar-mode -1))
   ;;; startup screen
   (setq inhibit-startup-screen t)
   ;;; line number
-  (global-linum-mode)
+  (if (< emacs-major-version 29)
+      (global-linum-mode)
+    (global-display-line-numbers-mode))
   ;;; highlight current line
   (global-hl-line-mode)
 #+end_src
