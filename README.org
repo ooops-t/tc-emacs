@@ -38,7 +38,7 @@
   ;;; <2023-10-07 Sat>
   (set-face-attribute 'default nil
 		      :family "Monospace"
-		      :font "Intel One Mono"
+		      :font "Intel One Mono Light"
 		      :foundry "outline"
 		      :weight 'regular
 		      :height 110)
@@ -58,10 +58,15 @@
       (menu-bar-mode -1))
   ;;; startup screen
   (setq inhibit-startup-screen t)
+#+end_src
+
+* line number
+#+begin_src emacs-lisp :tangle "init.el"
   ;;; line number
   (if (< emacs-major-version 29)
       (global-linum-mode)
-    (global-display-line-numbers-mode))
+    (progn (global-display-line-numbers-mode)
+	   (setq display-line-numbers-type 'relative)))
   ;;; highlight current line
   (global-hl-line-mode)
 #+end_src
@@ -73,11 +78,20 @@
   (setq make-backup-files nil)
 #+end_src
 
-* themes
+* refresh/revert file
+#+begin_src emacs-lisp :tangle "init.el"
+  ;;; refresh/revert file
+  (global-auto-revert-mode 1)
+#+end_src
+
+* Themes
 #+begin_src emacs-lisp :tangle "init.el"
   (use-package solarized-theme
     :ensure t)
-  (load-theme 'solarized-gruvbox-light t)
+  (use-package doom-themes
+    :ensure t)
+  ;;; <2023-11-06 Mon>
+  (load-theme 'doom-acario-dark t)
 #+end_src
 
 * mode line
