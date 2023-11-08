@@ -41,7 +41,7 @@
 		      :font "Intel One Mono Light"
 		      :foundry "outline"
 		      :weight 'regular
-		      :height 110)
+		      :height 150)
 #+end_src
 
 * views
@@ -182,17 +182,24 @@
     (exec-path-from-shell-initialize))
 #+end_src
 
-* programming languages
-
-** Haskell
+* company
 #+begin_src emacs-lisp :tangle "init.el"
-  (use-package haskell-mode
+  (use-package company
     :ensure t
-    :hook ((haskell-mode-hook . haskell-indentation-mode)))
+    :hook
+    (prog-mode . global-company-mode)
+    :init
+    (setq company-minimum-prefix-length 1)
+    (setq company-idle-delay 0))
+#+end_src
+
+* eglot
+#+begin_src emacs-lisp :tangle "init.el"
   (use-package eglot
     :ensure t
     :config
     (add-hook 'haskell-mode-hook 'eglot-ensure)
+    (add-hook 'zig-mode-hook 'eglot-ensure)
     :config
     (setq-default eglot-workspakce-configuration
 		  '((haskell
@@ -205,3 +212,17 @@
     )
 #+end_src
 
+* programming languages
+
+** Haskell
+#+begin_src emacs-lisp :tangle "init.el"
+  (use-package haskell-mode
+    :ensure t
+    :hook ((haskell-mode-hook . haskell-indentation-mode)))
+#+end_src
+
+** Ziglang
+#+begin_src emacs-lisp :tangle "init.el"
+  (use-package zig-mode
+    :ensure t)
+#+end_src
