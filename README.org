@@ -252,6 +252,19 @@ reference by: [[https://www.emacswiki.org/emacs/MoveLine][Emacs Wiki: Move Line]
   (global-set-key (kbd "M-<down>") 'move-line-down)
 #+end_src
 
+* flx
+#+begin_src emacs-lisp :tangle "init.el"
+  (use-package flx-ido
+    :ensure t
+    :init
+    (setq ido-enable-flex-matching t)
+    ;; (setq ido-use-faces nil)
+    :config
+    (ido-mode 1)
+    (ido-everywhere 1)
+    (flx-ido-mode 1))
+#+end_src
+
 * eglot
 #+begin_src emacs-lisp :tangle "init.el"
   (use-package eglot

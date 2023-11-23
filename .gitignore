@@ -4,3 +4,5 @@ elpa/
 .cache/
 projects
 *.eld
+*.last
+racket-mode/
