@@ -125,62 +125,71 @@ reference by:
   - [[https://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html][customizing-mode-line by emacs-fu]]
   - [[https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-modeline.el][init-modeline by refguardtoo]]
 #+begin_src emacs-lisp :tangle "init.el"
-  (setq-default mode-line-format
-    (list
-      ;;; the buffer name; the file name as a tool tip
-      '(:eval (propertize "%b " 'face 'font-lock-keyword-face
-	  'help-echo (buffer-file-name)))
+  (defcustom tc/use-custom-mode-line nil
+    "Non-nil means use custom mode line."
+    :type 'boolean)
 
-      ;;; line and column
-      "(" ;;; '%02' to set to 2 chars at least; prevents flickering
-	(propertize "%02l" 'face 'font-lock-type-face) ","
-	(propertize "%02c" 'face 'font-lock-type-face)
-      ") "
+  (if tc/use-custom-mode-line
+    (setq-default mode-line-format
+      (list
+	;;; the buffer name; the file name as a tool tip
+	'(:eval (propertize "%b " 'face 'font-lock-keyword-face
+	    'help-echo (buffer-file-name)))
 
-      ;;; relative position, size of file
-      "["
-      (propertize "%p" 'face 'font-lock-constant-face) ;;; % above top
-      "/"
-      (propertize "%I" 'face 'font-lock-constant-face) ;;; size
-      "] "
+	;;; line and column
+	"(" ;;; '%02' to set to 2 chars at least; prevents flickering
+	  (propertize "%02l" 'face 'font-lock-type-face) ","
+	  (propertize "%02c" 'face 'font-lock-type-face)
+	") "
 
-      ;;; the current major mode for the buffer.
-      "["
+	;;; relative position, size of file
+	"["
+	(propertize "%p" 'face 'font-lock-constant-face) ;;; % above top
+	"/"
+	(propertize "%I" 'face 'font-lock-constant-face) ;;; size
+	"] "
 
-      '(:eval (propertize "%m" 'face 'font-lock-string-face
-		'help-echo buffer-file-coding-system))
-      "] "
+	;;; the current major mode for the buffer.
+	"["
+
+	'(:eval (propertize "%m" 'face 'font-lock-string-face
+		  'help-echo buffer-file-coding-system))
+	"] "
 
 
-      "[" ;;; insert vs overwrite mode, input-method in a tooltip
-      '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
-		'face 'font-lock-preprocessor-face
-		'help-echo (concat "Buffer is in "
-			     (if overwrite-mode "overwrite" "insert") " mode")))
+	"[" ;;; insert vs overwrite mode, input-method in a tooltip
+	'(:eval (propertize (if overwrite-mode "Ovr" "Ins")
+		  'face 'font-lock-preprocessor-face
+		  'help-echo (concat "Buffer is in "
+			       (if overwrite-mode "overwrite" "insert") " mode")))
 
-      ;;; was this buffer modified since the last save?
-      '(:eval (when (buffer-modified-p)
-		(concat ","  (propertize "Mod"
-			       'face 'font-lock-warning-face
-			       'help-echo "Buffer has been modified"))))
+	;;; was this buffer modified since the last save?
+	'(:eval (when (buffer-modified-p)
+		  (concat ","  (propertize "Mod"
+				 'face 'font-lock-warning-face
+				 'help-echo "Buffer has been modified"))))
 
-      ;;; is this buffer read-only?
-      '(:eval (when buffer-read-only
-		(concat ","  (propertize "RO"
-			       'face 'font-lock-type-face
-			       'help-echo "Buffer is read-only"))))
-      "] "
+	;;; is this buffer read-only?
+	'(:eval (when buffer-read-only
+		  (concat ","  (propertize "RO"
+				 'face 'font-lock-type-face
+				 'help-echo "Buffer is read-only"))))
+	"] "
 
-      ;;; add the time, with the date and the emacs uptime in the tooltip
-      '(:eval (propertize (format-time-string "%H:%M")
-		'help-echo
-		(concat (format-time-string "%c; ")
-			(emacs-uptime "Uptime:%hh"))))
-      " --"
-      ;;; i don't want to see minor-modes; but if you want, uncomment this:
-      ;;; minor-mode-alist  ;; list of minor modes
-      "%-" ;;; fill with '-'
-      ))
+	;;; add the time, with the date and the emacs uptime in the tooltip
+	'(:eval (propertize (format-time-string "%H:%M")
+		  'help-echo
+		  (concat (format-time-string "%c; ")
+			  (emacs-uptime "Uptime:%hh"))))
+	" --"
+	;;; i don't want to see minor-modes; but if you want, uncomment this:
+	;;; minor-mode-alist  ;; list of minor modes
+	"%-" ;;; fill with '-'
+	))
+    (use-package powerline
+      :ensure t
+      :config
+      (powerline-center-theme)))
 #+end_src
 
 * column indicator
@@ -297,4 +306,28 @@ reference by: [[https://www.emacswiki.org/emacs/MoveLine][Emacs Wiki: Move Line]
 #+begin_src emacs-lisp :tangle "init.el"
   (use-package zig-mode
     :ensure t)
+#+end_src
+
+** OCaml
+- Must install some tools first
+#+begin_src shell
+  $ opam install ocaml-lsp-server ocamlformat merlin
+#+end_src
+- Config emacs
+#+begin_src emacs-lisp :tangle "init.el"
+  (use-package tuareg
+    :ensure t)
+  (use-package merlin
+    :ensure t
+    :config
+    (let ((opam-share (ignore-errors (car (process-lines "opam" "var" "share")))))
+	(when (and opam-share (file-directory-p opam-share))
+	 ;; Register Merlin
+	 (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
+	 (autoload 'merlin-mode "merlin" nil t nil)
+	 ;; Automatically start it in OCaml buffers
+	 (add-hook 'tuareg-mode-hook 'merlin-mode t)
+	 (add-hook 'caml-mode-hook 'merlin-mode t)
+	 ;; Use opam switch to lookup ocamlmerlin binary
+	 (setq merlin-command 'opam))))
 #+end_src
