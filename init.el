@@ -2,7 +2,12 @@
 
 ;; Code:
 
-;;; Load other configure files
+;; User custom file path
+(setq custom-file
+      (concat user-emacs-directory "custom.el"))
+(load custom-file 'noerror)
+
+;; Load other configure files
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (require 'tc-use-package)
