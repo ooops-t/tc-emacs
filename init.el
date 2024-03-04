@@ -8,5 +8,6 @@
 (require 'tc-use-package)
 (require 'tc-faces)
 (require 'tc-org)
+(require 'tc-edit)
 
 ;;; init.el ends here

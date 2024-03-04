@@ -34,7 +34,7 @@
   :group 'tc
   :type 'int)
 
-(defcustom tc-font-family "Fira Code"
+(defcustom tc-font-family "FiraCode Nerd Font Mono"
   "User define font family."
   :group 'tc
   :type 'string)
