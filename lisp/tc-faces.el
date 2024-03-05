@@ -29,7 +29,7 @@
 	 (global-hl-line-mode)))
 
 ;; Fonts
-(defcustom tc-font-size 16
+(defcustom tc-font-size 12
   "User define font size."
   :group 'tc
   :type 'int)
@@ -39,24 +39,23 @@
   :group 'tc
   :type 'string)
 
-(defcustom tc-font-for-cjk "LXGW WenKai Mono"
-  "User define unicode font family."
+(defcustom tc-font-chinese "LXGW WenKai Mono"
+  "User define Chinese font family."
   :group 'tc
   :type 'string)
 
 (when (display-graphic-p)
   (set-face-attribute 'default nil
-		      :font (font-spec
-			     :family tc-font-family
-			     :size tc-font-size))
-  ;; Set unicode character set
-  (set-fontset-font t 'unicode (font-spec
-				:family tc-font-family
-				:size tc-font-size))
-  ;; Set cjk character set
-  (set-fontset-font t '(#x2ff0 . #x9ffc) (font-spec
-					  :family tc-font-for-cjk
-					  :size tc-font-size)))
+		      :family tc-font-family
+		      :foundry "*"
+		      :width 'normal
+		      :height (* tc-font-size 10)
+		      :weight 'regular)
+  ;; Set Chinese font
+  ;; Reference: http://xahlee.info/emacs/emacs/emacs_set_font_zh.html
+  (set-fontset-font t 'han
+		    (cond
+		     ((member tc-font-chinese (font-family-list)) tc-font-chinese))))
 
 (provide 'tc-faces)
 ;;; tc-faces.el ends here
