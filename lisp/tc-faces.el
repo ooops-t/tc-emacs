@@ -26,7 +26,16 @@
   (progn (global-display-line-numbers-mode)
 	 (setq display-line-numbers-type 'relative)
 	 ;; Highlight current line
-	 (global-hl-line-mode)))
+	 (global-hl-line-mode)
+	 ;; Column number
+	 (column-number-mode 'toggle)
+	 ;; File size
+	 (size-indication-mode 'toggle)
+	 (global-display-fill-column-indicator-mode)
+	 ;; Show time
+	 (setq display-time-day-and-date 't)
+	 (setq display-time-24hr-format 't)
+	 (display-time-mode)))
 
 ;; Fonts
 (defcustom tc-font-size 12
@@ -56,6 +65,10 @@
   (set-fontset-font t 'han
 		    (cond
 		     ((member tc-font-chinese (font-family-list)) tc-font-chinese))))
+
+;; Theme
+(when (display-graphic-p)
+  (load-theme 'modus-vivendi-tritanopia t))
 
 (provide 'tc-faces)
 ;;; tc-faces.el ends here
