@@ -14,5 +14,6 @@
 (require 'tc-faces)
 (require 'tc-org)
 (require 'tc-edit)
+(require 'tc-company)
 
 ;;; init.el ends here
