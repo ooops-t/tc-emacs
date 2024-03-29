@@ -3,3 +3,5 @@ straight/
 org-roam.db
 elpa/
 transient/
+eshell/
+

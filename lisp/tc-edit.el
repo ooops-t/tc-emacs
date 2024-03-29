@@ -42,5 +42,10 @@
 (global-set-key (kbd "M-<up>") 'tc/move-line-up)
 (global-set-key (kbd "M-<down>") 'tc/move-line-down)
 
+;; Format all
+(use-package format-all
+  :straight (:type git :repo "lassik/emacs-format-all-the-code")
+  :hook (prog-mode . format-all-mode))
+
 (provide 'tc-edit)
 ;;; tc-edit.el ends there
