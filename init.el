@@ -3,6 +3,7 @@
 ;; code
 
 ;; Init package
+(require 'package)
 (package-initialize)
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
@@ -21,8 +22,13 @@
 (if (display-graphic-p)
     (toggle-frame-maximized))
 
-;; Set current languate environment
+;; Set current language environment
 (setq current-language-environment "UTF-8")
+;; Encoding and envs
+(prefer-coding-system 'utf-8)
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "LC_CTYPE" "en_US.UTF-8")
 ;; Don't blink cursor
 (setq blink-cursor-mode nil)
 ;; Show line number
@@ -31,6 +37,10 @@
 (set-scroll-bar-mode nil)
 ;; Hide tool bar
 (tool-bar-mode -1)
+;; No auto save backup file
+(setq make-backup-files nil)
+;; Refresh/revert file
+(setq global-auto-revert-mdoe 1)
 
 ;; Set fonts
 (when (display-graphic-p)
