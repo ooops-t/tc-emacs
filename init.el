@@ -101,5 +101,9 @@
 						     :zig_exe_path "/usr/bin/zig")))))
 (add-hook 'zig-mode-hook 'eglot-ensure)
 
+;; Haskell
+(use-package haskell-mode
+  :ensure t)
+(add-hook 'haskell-mode-hook 'eglot-ensure)
 
 ;;; init.el ends here
