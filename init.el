@@ -47,7 +47,7 @@
 
 ;; Set fonts
 (when (display-graphic-p)
-  (defcustom tc/fonts-default "Iosevka"
+  (defcustom tc/fonts-default "Iosevka Nerd Font Mono"
     "Default Fonts"
     :type 'string
     :group 'tc/fonts)
@@ -78,6 +78,16 @@
     ;; Enables ligature checks globally in all buffers. You can also do it
     ;; per mode with `ligature-mode'.
     (global-ligature-mode t)))
+
+;; Company
+(use-package company
+  :ensure t
+  :init
+  (setq company-minimum-prefix-length 1)
+  (setq company-global-modes '(not erc-mode message-mode eshell-mode))
+  (setq company-idle-delay
+	(lambda () (if (company-in-string-or-comment) nil 0.3)))
+  :hook (prog-mode . global-company-mode))
 
 ;;; init.el ends here
 
