@@ -50,6 +50,7 @@
 (require 'init-font)
 (require 'init-modeline)
 (require 'init-ziglang)
+(require 'init-org)
 
 ;; Company
 (use-package company
