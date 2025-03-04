@@ -51,6 +51,7 @@
 (require 'init-modeline)
 (require 'init-ziglang)
 (require 'init-org)
+(require 'init-theme)
 
 ;; Company
 (use-package company
