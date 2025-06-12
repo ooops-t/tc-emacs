@@ -11,10 +11,17 @@ aligned respectively."
   (let* ((available-width (- (window-width) (length left) 2)))
     (format (format " %%s %%%ds " available-width) left right)))
 
+(defun tc/file-name ()
+    "Return file name or the `%b' for mode line"
+  (let ((file-name (buffer-file-name)))
+    (if file-name
+	file-name
+      "%b")))
+
 (setq-default mode-line-format
       '((:eval (tc/simple-mode-line-render
 		;; left
-		(format-mode-line (concat "[%*] [%m] %b:%I"))
+		(format-mode-line (concat "[%*] [%m] " (tc/file-name) ":%I"))
 		;; right
 		(format-mode-line (concat "%l/%c [" display-time-string "]"))))))
 

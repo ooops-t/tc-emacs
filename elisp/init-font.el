@@ -1,6 +1,6 @@
 ;; Set fonts
 (when (display-graphic-p)
-  (defcustom tc/fonts-default "Iosevka Comfy Wide Motion"
+  (defcustom tc/fonts-default "FantasqueSansM Nerd Font Mono"
     "Default Fonts"
     :type 'string
     :group 'tc/fonts)
@@ -11,7 +11,7 @@
   (set-face-attribute 'default nil
 		      :family tc/fonts-default
 		      :foundry "*"
-		      :width 'normal
+;;		      :width 'normal
 		      :height (* 12 10)
 		      :weight 'semi-light)
   ;; Set Chinese font
