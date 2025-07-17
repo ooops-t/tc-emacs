@@ -89,4 +89,8 @@
   :config
   (which-key-mode))
 
+;; Magit
+(use-package magit
+  :ensure t)
+
 ;;; init.el ends here
