@@ -1,6 +1,6 @@
 ;; Set fonts
 (when (display-graphic-p)
-  (defcustom tc/fonts-default "FantasqueSansM Nerd Font Mono"
+  (defcustom tc/fonts-default "ComicShannsMono Nerd Font Mono"
     "Default Fonts"
     :type 'string
     :group 'tc/fonts)

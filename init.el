@@ -12,6 +12,24 @@
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
 ;; Not use this ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
 
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
 ;; User custom file path
 (setq custom-file
       (concat user-emacs-directory "custom.el"))
@@ -24,7 +42,7 @@
 ;; (setq initial-scratch-message nil)
 ;; (if (display-graphic-p)
 ;;     (toggle-frame-maximized))
-;; 
+;;
 ;; Set current language environment
 (setq current-language-environment "UTF-8")
 ;; Encoding and envs
@@ -48,10 +66,12 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
 (require 'init-font)
-(require 'init-modeline)
+;; (require 'init-modeline)
 (require 'init-ziglang)
 (require 'init-org)
 (require 'init-theme)
+(require 'init-ocaml)
+(require 'init-typst)
 
 ;; Company
 (use-package company
