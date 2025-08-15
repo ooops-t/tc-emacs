@@ -67,4 +67,8 @@
 (use-package magit
   :ensure t)
 
+;; Format all buffer
+(use-package format-all
+  :ensure t)
+
 ;;; init.el ends here
