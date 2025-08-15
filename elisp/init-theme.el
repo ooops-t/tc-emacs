@@ -3,6 +3,6 @@
   :ensure t
   :if (display-graphic-p)
   :config
-  (load-theme 'ef-trio-dark t))
+  (load-theme 'ef-trio-light t))
 
 (provide 'init-theme)
