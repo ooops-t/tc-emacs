@@ -32,7 +32,7 @@
 (global-auto-revert-mode t)
 
 ;; Fonts
-(defcustom tc/fonts-default "FantasqueSansM Nerd Font Mono"
+(defcustom tc/fonts-default "UbuntuSansMono Nerd Font Mono"
   "Default Fonts"
   :type 'string
   :group 'tc/fonts)
@@ -52,18 +52,21 @@
 		  (cond
 		   ((member tc/fonts-chinese (font-family-list)) tc/fonts-chinese)))
 
-;; Modeline
-(use-package telephone-line
-  :ensure t
-  :init
-  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-	telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-	telephone-line-primary-right-separator 'telephone-line-cubed-right
-	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  (setq telephone-line-height 24
-	telephone-line-evil-use-short-tag t)
-  :config
-  (telephone-line-mode t))
+;; Mode-line
+(setq-default  mode-line-format
+	       '("%e" mode-line-front-space
+		 (:propertize
+		  ("" mode-line-mule-info mode-line-client mode-line-modified
+		   mode-line-remote mode-line-window-dedicated)
+		  display (min-width (6.0)))
+		 mode-line-frame-identification mode-line-buffer-identification "   "
+		 "%I [L%l/C%c]" (project-mode-line project-mode-line-format)
+		 (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info
+		 mode-line-end-spaces))
+(set-face-attribute 'mode-line nil
+		    :foreground "medium blue"
+		    :background "light gray"
+		    :box '(:line-width (1 . -1) :color "white" :style flat-button))
 
 ;; Which key
 (use-package which-key

@@ -17,6 +17,7 @@
 
 ;; Init package
 (require 'package)
+(setq package-quickstart t)
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
 ;; If you use in Emacs<27, you may want to add something like
@@ -30,5 +31,6 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (setq use-package-compute-statistics t)
+(setq use-package-always-defer t)
 
 ;;; early-init.el ends here

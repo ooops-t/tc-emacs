@@ -1,4 +1,6 @@
 custom.el
+package-*.el*
 eln-cache/
 elpa/
 transient/
+tree-*
